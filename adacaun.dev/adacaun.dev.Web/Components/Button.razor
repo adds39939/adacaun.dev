@@ -1,0 +1,16 @@
+﻿<button
+    class="rounded-full bg-transparent text-purple-800 px-4 py-1 border-2 border-purple-500 hover:bg-purple-500 hover:text-white transition ease-in-out duration-150"
+    @onclick="OnClick">
+
+    @ChildContent
+</button>
+
+@code {
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+}

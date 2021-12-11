@@ -2,4 +2,26 @@
 
 <PageTitle>Index</PageTitle>
 
-Welcome to your new app.
+<Card>
+    Hello poo face
+</Card>
+
+<Card>
+    <Button OnClick="@(() => text = "hussain is mega gay")">
+        @text
+    </Button>
+    
+    <Button>
+        Hussain smells
+    </Button>
+    
+    <Button>
+        Poo in the loo
+    </Button>
+</Card>
+
+@code {
+
+    string text = "Hello";
+
+}
