@@ -1,0 +1,33 @@
+﻿@inherits UIComponentBase
+
+<div class="@GetCardClass()">
+    @ChildContent
+</div>
+
+@code {
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+
+    private string GetCardClass()
+    {
+        string css = @"
+            rounded-lg
+            shadow-sm
+            border-2 border-slate-250
+            w-100
+            m-2 p-4
+            bg-slate-50";
+        
+        if (Attributes is null || !Attributes.TryGetValue("class", out var additionalClass))
+        {
+            return FormatCss(css);
+        }
+
+        return FormatCss(string.Concat(css, " ", additionalClass));
+    }
+
+}

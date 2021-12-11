@@ -1,0 +1,41 @@
+﻿@inherits UIComponentBase
+
+<button class="@GetButtonClass()" @onclick="OnClick">
+    @ChildContent
+</button>
+
+@code {
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    [Parameter]
+    public string Color { get; set; } = "blue";
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? Attributes { get; set; }
+
+    private string GetButtonClass()
+    {
+        string css = string.Format(@"
+            rounded-full
+            bg-transparent
+            text-{0}-600
+            px-4 py-1
+            border-2 border-{0}-500
+            hover:bg-{0}-500 hover:text-white
+            active:bg-{0}-600 active:border-{0}-600
+            transition ease-in-out duration-150", Color);
+        
+        if (Attributes is null || !Attributes.TryGetValue("class", out var additionalCss))
+        {
+            return FormatCss(css);
+        }
+
+        return FormatCss(string.Concat(css, " ", additionalCss));
+    }
+
+}
